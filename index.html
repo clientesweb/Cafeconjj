@@ -1,168 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Clone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <style>
-        .slider-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            max-width: 800px; /* Ajusta el tamaño según sea necesario */
-            margin: auto;
-        }
-        .slider-content {
-            display: flex;
-            transition: transform 0.3s ease-in-out;
-        }
-        .video-card, .short-card {
-            min-width: 300px; /* Ajusta el tamaño según sea necesario */
-            margin-right: 10px; /* Espaciado entre elementos */
-        }
-    </style>
+    <title>YouTube Clone Enhanced</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-100">
-
-    <header class="bg-gray-800 text-white py-4">
-        <h1 class="text-center text-2xl font-bold">YouTube Clone</h1>
+<body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-10 bg-white border-b animate-fade-in">
+        <!-- Header Content -->
     </header>
 
-    <main class="py-6">
-        <div class="container mx-auto px-4">
-            <!-- Videos Section -->
-            <div class="mb-8">
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <!-- Banner Carousel -->
+            <div class="relative mb-8 h-40 sm:h-64 bg-gray-200 rounded-lg overflow-hidden animate-fade-in">
+                <!-- Carousel Content -->
+            </div>
+
+            <!-- YouTube Videos Section -->
+            <div class="mb-8 animate-slide-up">
                 <h2 class="text-2xl font-bold mb-4">Videos</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="videosSlider"></div>
-                    <button class="slider-button slider-button-left" id="videosSliderLeft">&lt;</button>
-                    <button class="slider-button slider-button-right" id="videosSliderRight">&gt;</button>
+                    <div class="slider-content" id="videosSlider">
+                        <!-- Video cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="videosSliderLeft">
+                        <!-- Left Arrow -->
+                    </button>
+                    <button class="slider-button slider-button-right" id="videosSliderRight">
+                        <!-- Right Arrow -->
+                    </button>
                 </div>
             </div>
 
             <!-- Shorts Section -->
-            <div class="mb-8">
+            <div class="mb-8 animate-slide-up" style="animation-delay: 0.2s;">
                 <h2 class="text-2xl font-bold mb-4">Shorts</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="shortsSlider"></div>
-                    <button class="slider-button slider-button-left" id="shortsSliderLeft">&lt;</button>
-                    <button class="slider-button slider-button-right" id="shortsSliderRight">&gt;</button>
+                    <div class="slider-content" id="shortsSlider">
+                        <!-- Short cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="shortsSliderLeft">
+                        <!-- Left Arrow -->
+                    </button>
+                    <button class="slider-button slider-button-right" id="shortsSliderRight">
+                        <!-- Right Arrow -->
+                    </button>
                 </div>
             </div>
 
             <!-- Sponsors Section -->
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold mb-4">Sponsors</h2>
+            <div class="mb-8 animate-slide-up" style="animation-delay: 0.4s;">
+                <h2 class="text-2xl font-bold mb-4">Our Sponsors</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="sponsorsSlider"></div>
-                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">&lt;</button>
-                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">&gt;</button>
+                    <div class="slider-content" id="sponsorsSlider">
+                        <!-- Sponsor cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">
+                        <!-- Left Arrow -->
+                    </button>
+                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">
+                        <!-- Right Arrow -->
+                    </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-4">
-        <div class="text-center">
-            <p>&copy; 2024 YouTube Clone. All rights reserved.</p>
-        </div>
+    <footer class="bg-gray-900 text-white py-12 animate-fade-in">
+        <!-- Footer Content -->
     </footer>
 
-    <script>
-        let videosIndex = 0;
-        let shortsIndex = 0;
-        let sponsorsIndex = 0;
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t py-2 md:hidden animate-fade-in">
+        <!-- Bottom Navigation Bar -->
+    </nav>
 
-        const videos = [
-            { title: 'Video 1', thumbnail: 'https://via.placeholder.com/300' },
-            { title: 'Video 2', thumbnail: 'https://via.placeholder.com/300' },
-            { title: 'Video 3', thumbnail: 'https://via.placeholder.com/300' },
-            { title: 'Video 4', thumbnail: 'https://via.placeholder.com/300' },
-            { title: 'Video 5', thumbnail: 'https://via.placeholder.com/300' }
-        ];
-
-        const shorts = [
-            { title: 'Short 1', thumbnail: 'https://via.placeholder.com/150' },
-            { title: 'Short 2', thumbnail: 'https://via.placeholder.com/150' },
-            { title: 'Short 3', thumbnail: 'https://via.placeholder.com/150' }
-        ];
-
-        const sponsors = [
-            { name: 'Sponsor 1', logo: 'https://via.placeholder.com/200' },
-            { name: 'Sponsor 2', logo: 'https://via.placeholder.com/200' },
-            { name: 'Sponsor 3', logo: 'https://via.placeholder.com/200' }
-        ];
-
-        function populateSlider(slider, items, isShort = false) {
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = isShort ? 'short-card video-card border rounded' : 'video-card border rounded';
-                card.innerHTML = `
-                    <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-auto rounded">
-                    <h3 class="font-bold mt-2">${item.title}</h3>
-                `;
-                slider.appendChild(card);
-            });
-        }
-
-        function updateSlider(slider, index, cardWidth) {
-            slider.style.transform = `translateX(-${index * cardWidth}px)`;
-        }
-
-        const videosSlider = document.getElementById('videosSlider');
-        const shortsSlider = document.getElementById('shortsSlider');
-        const sponsorsSlider = document.getElementById('sponsorsSlider');
-
-        populateSlider(videosSlider, videos);
-        populateSlider(shortsSlider, shorts, true);
-        populateSlider(sponsorsSlider, sponsors);
-
-        const videoCardWidth = 300; // Ajusta según el tamaño del video card
-        const shortCardWidth = 150; // Ajusta según el tamaño del short card
-        const sponsorCardWidth = 200; // Ajusta según el tamaño del sponsor card
-
-        document.getElementById('videosSliderRight').addEventListener('click', () => {
-            if (videosIndex < videos.length - 1) {
-                videosIndex++;
-                updateSlider(videosSlider, videosIndex, videoCardWidth);
-            }
-        });
-
-        document.getElementById('videosSliderLeft').addEventListener('click', () => {
-            if (videosIndex > 0) {
-                videosIndex--;
-                updateSlider(videosSlider, videosIndex, videoCardWidth);
-            }
-        });
-
-        document.getElementById('shortsSliderRight').addEventListener('click', () => {
-            if (shortsIndex < shorts.length - 1) {
-                shortsIndex++;
-                updateSlider(shortsSlider, shortsIndex, shortCardWidth);
-            }
-        });
-
-        document.getElementById('shortsSliderLeft').addEventListener('click', () => {
-            if (shortsIndex > 0) {
-                shortsIndex--;
-                updateSlider(shortsSlider, shortsIndex, shortCardWidth);
-            }
-        });
-
-        document.getElementById('sponsorsSliderRight').addEventListener('click', () => {
-            if (sponsorsIndex < sponsors.length - 1) {
-                sponsorsIndex++;
-                updateSlider(sponsorsSlider, sponsorsIndex, sponsorCardWidth);
-            }
-        });
-
-        document.getElementById('sponsorsSliderLeft').addEventListener('click', () => {
-            if (sponsorsIndex > 0) {
-                sponsorsIndex--;
-                updateSlider(sponsorsSlider, sponsorsIndex, sponsorCardWidth);
-            }
-        });
-    </script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
