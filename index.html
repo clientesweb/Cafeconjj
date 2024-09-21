@@ -135,228 +135,67 @@
                         <!-- Short cards will be inserted here by JavaScript -->
                     </div>
                     <button class="slider-button slider-button-left" id="shortsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="shortsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Sponsors Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.4s;">
-                <h2 class="text-2xl font-bold mb-4">Our Sponsors</h2>
-                <div class="slider-container">
-                    <div class="slider-content" id="sponsorsSlider">
-                        <!-- Sponsor cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-gray-900 text-white py-12 animate-fade-in">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">About</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">About Us</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Press</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Copyright</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Terms</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">Help Center</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Creator Support</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Our Location</h3>
-                    <div id="map" class="h-48 rounded-lg overflow-hidden"></div>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-                © 2023 YouTube Clone Enhanced. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t py-2 md:hidden animate-fade-in">
-        <div class="flex justify-around">
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span class="text-xs mt-1">Home</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-                <span class="text-xs mt-1">Explore</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                <span class="text-xs mt-1">Create</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10V8a1 1 0 011-1h6a1 1 0 011 1v2z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10v5a1 1 0 001 1h6a1 1 0 001-1v-5z" />
-                </svg>
-                <span class="text-xs mt-1">Subscriptions</span>
-            </button>
-        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w
+</div>
     </nav>
 
-    <!-- WhatsApp Floating Button -->
-    <button class="fixed bottom-20 right-4 md:bottom-4 p-3 bg-green-500 hover:bg-green-600 rounded-full shadow-lg animate-fade-in">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-    </button>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
     <script>
-        function createVideoCard(title) {
-            return `
-                <div class="video-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold truncate">${title}</h3>
-                        <p class="text-sm text-gray-500">Channel Name</p>
+        const videos = [
+            { title: "Video 1", thumbnail: "thumbnail1.jpg" },
+            { title: "Video 2", thumbnail: "thumbnail2.jpg" },
+            { title: "Video 3", thumbnail: "thumbnail3.jpg" },
+            { title: "Video 4", thumbnail: "thumbnail4.jpg" },
+            { title: "Video 5", thumbnail: "thumbnail5.jpg" },
+        ];
+
+        const shorts = [
+            { title: "Short 1", thumbnail: "short1.jpg" },
+            { title: "Short 2", thumbnail: "short2.jpg" },
+            { title: "Short 3", thumbnail: "short3.jpg" },
+            { title: "Short 4", thumbnail: "short4.jpg" },
+            { title: "Short 5", thumbnail: "short5.jpg" },
+        ];
+
+        const sponsors = [
+            { name: "Sponsor 1", logo: "logo1.jpg" },
+            { name: "Sponsor 2", logo: "logo2.jpg" },
+            { name: "Sponsor 3", logo: "logo3.jpg" },
+            { name: "Sponsor 4", logo: "logo4.jpg" },
+            { name: "Sponsor 5", logo: "logo5.jpg" },
+        ];
+
+        function renderCards(data, containerId, isShort = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = data.map(item => `
+                <div class="${isShort ? 'short-card' : 'video-card'} rounded-lg overflow-hidden shadow-lg">
+                    <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-auto">
+                    <div class="p-2">
+                        <h3 class="font-semibold">${item.title}</h3>
                     </div>
                 </div>
-            `;
+            `).join('');
         }
 
-        function createShortCard(title) {
-            return `
-                <div class="short-card">
-                    <div class="aspect-w-9 aspect-h-16 bg-gray-200 rounded-md mb-2 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-sm truncate">${title}</h3>
-                </div>
-            `;
+        renderCards(videos, 'videosSlider');
+        renderCards(shorts, 'shortsSlider', true);
+        renderCards(sponsors, 'sponsorsSlider');
+
+        function slide(containerId, offset) {
+            const slider = document.getElementById(containerId);
+            const scrollAmount = offset * 320; // Adjust according to your card width
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
 
-        function createSponsorCard(name) {
-            return `
-                <div class="sponsor-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                    <div class="h-24 bg-gray-200 rounded-md mb-2 flex items-center justify-center">
-                        <span class="text-gray-500 font-semibold">${name} Logo</span>
-                    </div>
-                    <h3 class="font-semibold text-sm text-center">${name}</h3>
-                </div>
-            `;
-        }
-
-        const videosSlider = document.getElementById('videosSlider');
-        const shortsSlider = document.getElementById('shortsSlider');
-        const sponsorsSlider = document.getElementById('sponsorsSlider');
-
-        // Populate videos
-        for (let i = 1; i <= 10; i++) {
-            videosSlider.innerHTML += createVideoCard(`Video Title ${i}`);
-        }
-
-        // Populate shorts
-        for (let i = 1; i <= 10; i++) {
-            shortsSlider.innerHTML += createShortCard(`Short Title ${i}`);
-        }
-
-        // Populate sponsors
-        const sponsors = ['Sponsor A', 'Sponsor B', 'Sponsor C', 'Sponsor D', 'Sponsor E', 'Sponsor F'];
-        sponsors.forEach(sponsor => {
-            sponsorsSlider.innerHTML += createSponsorCard(sponsor);
-        });
-
-        function initSlider(sliderId, leftButtonId, rightButtonId) {
-            const slider = document.getElementById(sliderId);
-            const leftButton = document.getElementById(leftButtonId);
-            const rightButton = document.getElementById(rightButtonId);
-            let scrollAmount = 0;
-
-            leftButton.addEventListener('click', () => {
-                scrollAmount = Math.max(scrollAmount - 300, 0);
-                slider.style.transform = `translateX(-${scrollAmount}px)`;
-            });
-
-            rightButton.addEventListener('click', () => {
-                scrollAmount = Math.min(scrollAmount + 300, slider.scrollWidth - slider.clientWidth);
-                slider.style.transform = `translateX(-${scrollAmount}px)`;
-            });
-        }
-
-        initSlider('videosSlider', 'videosSliderLeft', 'videosSliderRight');
-        initSlider('shortsSlider', 'shortsSliderLeft', 'shortsSliderRight');
-        initSlider('sponsorsSlider', 'sponsorsSliderLeft', 'sponsorsSliderRight');
-
-        function initMap() {
-            const mapOptions = {
-                center: { lat: 37.7749, lng: -122.4194 }, // San Francisco coordinates
-                zoom: 12
-            };
-            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        }
-
-        // PWA installation
-        let deferredPrompt;
-        const installButton = document.getElementById('installApp');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-
-        installButton.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
+        document.getElementById('videosSliderLeft').addEventListener('click', () => slide('videosSlider', -1));
+        document.getElementById('videosSliderRight').addEventListener('click', () => slide('videosSlider', 1));
+        document.getElementById('shortsSliderLeft').addEventListener('click', () => slide('shortsSlider', -1));
+        document.getElementById('shortsSliderRight').addEventListener('click', () => slide('shortsSlider', 1));
+        document.getElementById('sponsorsSliderLeft').addEventListener('click', () => slide('sponsorsSlider', -1));
+        document.getElementById('sponsorsSliderRight').addEventListener('click', () => slide('sponsorsSlider', 1));
+        
+        // Install app button functionality (Placeholder)
+        document.getElementById('installApp').addEventListener('click', () => {
+            alert("Install app functionality is not implemented yet.");
         });
     </script>
 </body>
