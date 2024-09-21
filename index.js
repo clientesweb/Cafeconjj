@@ -1,42 +1,9 @@
-import React from 'react';
-import Slider from 'react-slick';
-import { ChevronLeft, ChevronRight, Play, User } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import React from 'react'
+import { ChevronLeft, ChevronRight, Play, Home, Compass, Plus, VideoIcon, User, WhatsappIcon } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 
 export default function Component() {
-  const videoSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
-  const shortsSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-10 bg-white border-b">
@@ -53,7 +20,7 @@ export default function Component() {
           <div className="flex-1 max-w-xl mx-4">
             <input
               type="search"
-              placeholder="Buscar"
+              placeholder="Search"
               className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -67,56 +34,109 @@ export default function Component() {
         <div className="max-w-7xl mx-auto px-4 py-8">
           {/* Banner Carousel */}
           <div className="relative mb-8 h-40 sm:h-64 bg-gray-200 rounded-lg overflow-hidden">
-            {/* Contenido del banner */}
+            <div className="absolute inset-0 flex items-center justify-between px-4">
+              <Button variant="ghost" size="icon" className="rounded-full bg-white/80">
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+              <Button variant="ghost" size="icon" className="rounded-full bg-white/80">
+                <ChevronRight className="h-6 w-6" />
+              </Button>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl font-bold text-white">Banner Carousel</span>
+            </div>
           </div>
 
           {/* YouTube Videos Section */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold mb-4">Videos</h2>
-            <Slider {...videoSettings}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {[...Array(8)].map((_, i) => (
                 <Card key={i}>
                   <CardContent className="p-4">
                     <div className="aspect-video bg-gray-200 rounded-md mb-2 relative">
                       <Play className="w-12 h-12 text-white absolute inset-0 m-auto" />
                     </div>
-                    <h3 className="font-semibold truncate">Título del Video {i + 1}</h3>
-                    <p className="text-sm text-gray-500">Nombre del Canal</p>
+                    <h3 className="font-semibold truncate">Video Title {i + 1}</h3>
+                    <p className="text-sm text-gray-500">Channel Name</p>
                   </CardContent>
                 </Card>
               ))}
-            </Slider>
+            </div>
           </div>
 
           {/* Shorts Section */}
           <div>
             <h2 className="text-2xl font-bold mb-4">Shorts</h2>
-            <Slider {...shortsSettings}>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="flex flex-col items-center">
+                <div key={i}>
                   <div className="aspect-[9/16] bg-gray-200 rounded-md mb-2 relative">
                     <Play className="w-8 h-8 text-white absolute inset-0 m-auto" />
                   </div>
-                  <h3 className="font-semibold text-sm truncate">Título del Short {i + 1}</h3>
+                  <h3 className="font-semibold text-sm truncate">Short Title {i + 1}</h3>
                 </div>
               ))}
-            </Slider>
+            </div>
           </div>
         </div>
       </main>
 
       <footer className="bg-gray-100 mt-12">
         <div className="max-w-7xl mx-auto px-4 py-8">
-          {/* Contenido del pie de página */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="font-bold mb-2">About</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-blue-600 hover:underline">About Us</a></li>
+                <li><a href="#" className="text-blue-600 hover:underline">Press</a></li>
+                <li><a href="#" className="text-blue-600 hover:underline">Copyright</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-2">Terms</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-blue-600 hover:underline">Terms of Service</a></li>
+                <li><a href="#" className="text-blue-600 hover:underline">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-2">Contact</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-blue-600 hover:underline">Help Center</a></li>
+                <li><a href="#" className="text-blue-600 hover:underline">Creator Support</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 text-center text-gray-500">
+            © 2023 YouTube Clone. All rights reserved.
+          </div>
         </div>
       </footer>
 
-      {/* Navegación inferior */}
+      {/* Bottom Navigation Bar */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t py-2 md:hidden">
-        {/* Contenido de la navegación */}
+        <div className="flex justify-around">
+          <Button variant="ghost" size="sm" className="flex flex-col items-center">
+            <Home className="h-5 w-5" />
+            <span className="text-xs mt-1">Home</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="flex flex-col items-center">
+            <Compass className="h-5 w-5" />
+            <span className="text-xs mt-1">Explore</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="flex flex-col items-center">
+            <Plus className="h-5 w-5" />
+            <span className="text-xs mt-1">Create</span>
+          </Button>
+          <Button variant="ghost" size="sm" className="flex flex-col items-center">
+            <VideoIcon className="h-5 w-5" />
+            <span className="text-xs mt-1">Subscriptions</span>
+          </Button>
+        </div>
       </nav>
 
-      {/* Botón flotante de WhatsApp */}
+      {/* WhatsApp Floating Button */}
       <Button
         variant="default"
         size="icon"
@@ -125,5 +145,5 @@ export default function Component() {
         <WhatsappIcon className="h-6 w-6 text-white" />
       </Button>
     </div>
-  );
-              }
+  )
+}
