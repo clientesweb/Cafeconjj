@@ -1,0 +1,57 @@
+.slider-container {
+    overflow-x: hidden;
+    position: relative;
+}
+.slider-content {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+.video-card {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 16px;
+}
+.short-card {
+    flex: 0 0 auto;
+    width: 150px;
+    margin-right: 16px;
+}
+.sponsor-card {
+    flex: 0 0 auto;
+    width: 200px;
+    margin-right: 16px;
+}
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+.slider-button-left {
+    left: 10px;
+}
+.slider-button-right {
+    right: 10px;
+}
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.animate-slide-up {
+    animation: slideUp 0.5s ease-in-out;
+}
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
