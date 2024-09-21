@@ -1,12 +1,363 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Proyecto</title>
+    <title>YouTube Clone Enhanced</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .slider-container {
+            overflow-x: hidden;
+            position: relative;
+        }
+        .slider-content {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+        .video-card {
+            flex: 0 0 auto;
+            width: 300px;
+            margin-right: 16px;
+        }
+        .short-card {
+            flex: 0 0 auto;
+            width: 150px;
+            margin-right: 16px;
+        }
+        .sponsor-card {
+            flex: 0 0 auto;
+            width: 200px;
+            margin-right: 16px;
+        }
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .slider-button-left {
+            left: 10px;
+        }
+        .slider-button-right {
+            right: 10px;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-in-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
 </head>
-<body>
-    <div id="root"></div>
-    <script src="/index.js"></script> <!-- Reemplaza con la ruta correcta -->
+<body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-10 bg-white border-b animate-fade-in">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <svg class="w-24 h-8 text-red-600" fill="currentColor" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000" />
+                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white" />
+            </svg>
+            <div class="flex-1 max-w-xl mx-4">
+                <input type="search" placeholder="Search" class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button class="p-2 rounded-full hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </button>
+            <button id="installApp" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Install App
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <!-- Banner Carousel -->
+            <div class="relative mb-8 h-40 sm:h-64 bg-gray-200 rounded-lg overflow-hidden animate-fade-in">
+                <div class="absolute inset-0 flex items-center justify-between px-4">
+                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <span class="text-2xl font-bold text-white">Banner Carousel</span>
+                </div>
+            </div>
+
+            <!-- YouTube Videos Section -->
+            <div class="mb-8 animate-slide-up">
+                <h2 class="text-2xl font-bold mb-4">Videos</h2>
+                <div class="slider-container">
+                    <div class="slider-content" id="videosSlider">
+                        <!-- Video cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="videosSliderLeft">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="slider-button slider-button-right" id="videosSliderRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Shorts Section -->
+            <div class="mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                <h2 class="text-2xl font-bold mb-4">Shorts</h2>
+                <div class="slider-container">
+                    <div class="slider-content" id="shortsSlider">
+                        <!-- Short cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="shortsSliderLeft">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="slider-button slider-button-right" id="shortsSliderRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sponsors Section -->
+            <div class="mb-8 animate-slide-up" style="animation-delay: 0.4s;">
+                <h2 class="text-2xl font-bold mb-4">Our Sponsors</h2>
+                <div class="slider-container">
+                    <div class="slider-content" id="sponsorsSlider">
+                        <!-- Sponsor cards will be inserted here by JavaScript -->
+                    </div>
+                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 animate-fade-in">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">About Us</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Press</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Copyright</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Terms</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-gray-300">Help Center</a></li>
+                        <li><a href="#" class="hover:text-gray-300">Creator Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Our Location</h3>
+                    <div id="map" class="h-48 rounded-lg overflow-hidden"></div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                © 2023 YouTube Clone Enhanced. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t py-2 md:hidden animate-fade-in">
+        <div class="flex justify-around">
+            <button class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-xs mt-1">Home</span>
+            </button>
+            <button class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+                <span class="text-xs mt-1">Explore</span>
+            </button>
+            <button class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                <span class="text-xs mt-1">Create</span>
+            </button>
+            <button class="flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10V8a1 1 0 011-1h6a1 1 0 011 1v2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10v5a1 1 0 001 1h6a1 1 0 001-1v-5z" />
+                </svg>
+                <span class="text-xs mt-1">Subscriptions</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- WhatsApp Floating Button -->
+    <button class="fixed bottom-20 right-4 md:bottom-4 p-3 bg-green-500 hover:bg-green-600 rounded-full shadow-lg animate-fade-in">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+    </button>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script>
+        function createVideoCard(title) {
+            return `
+                <div class="video-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold truncate">${title}</h3>
+                        <p class="text-sm text-gray-500">Channel Name</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createShortCard(title) {
+            return `
+                <div class="short-card">
+                    <div class="aspect-w-9 aspect-h-16 bg-gray-200 rounded-md mb-2 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-sm truncate">${title}</h3>
+                </div>
+            `;
+        }
+
+        function createSponsorCard(name) {
+            return `
+                <div class="sponsor-card bg-white rounded-lg shadow-md overflow-hidden p-4">
+                    <div class="h-24 bg-gray-200 rounded-md mb-2 flex items-center justify-center">
+                        <span class="text-gray-500 font-semibold">${name} Logo</span>
+                    </div>
+                    <h3 class="font-semibold text-sm text-center">${name}</h3>
+                </div>
+            `;
+        }
+
+        const videosSlider = document.getElementById('videosSlider');
+        const shortsSlider = document.getElementById('shortsSlider');
+        const sponsorsSlider = document.getElementById('sponsorsSlider');
+
+        // Populate videos
+        for (let i = 1; i <= 10; i++) {
+            videosSlider.innerHTML += createVideoCard(`Video Title ${i}`);
+        }
+
+        // Populate shorts
+        for (let i = 1; i <= 10; i++) {
+            shortsSlider.innerHTML += createShortCard(`Short Title ${i}`);
+        }
+
+        // Populate sponsors
+        const sponsors = ['Sponsor A', 'Sponsor B', 'Sponsor C', 'Sponsor D', 'Sponsor E', 'Sponsor F'];
+        sponsors.forEach(sponsor => {
+            sponsorsSlider.innerHTML += createSponsorCard(sponsor);
+        });
+
+        function initSlider(sliderId, leftButtonId, rightButtonId) {
+            const slider = document.getElementById(sliderId);
+            const leftButton = document.getElementById(leftButtonId);
+            const rightButton = document.getElementById(rightButtonId);
+            let scrollAmount = 0;
+
+            leftButton.addEventListener('click', () => {
+                scrollAmount = Math.max(scrollAmount - 300, 0);
+                slider.style.transform = `translateX(-${scrollAmount}px)`;
+            });
+
+            rightButton.addEventListener('click', () => {
+                scrollAmount = Math.min(scrollAmount + 300, slider.scrollWidth - slider.clientWidth);
+                slider.style.transform = `translateX(-${scrollAmount}px)`;
+            });
+        }
+
+        initSlider('videosSlider', 'videosSliderLeft', 'videosSliderRight');
+        initSlider('shortsSlider', 'shortsSliderLeft', 'shortsSliderRight');
+        initSlider('sponsorsSlider', 'sponsorsSliderLeft', 'sponsorsSliderRight');
+
+        function initMap() {
+            const mapOptions = {
+                center: { lat: 37.7749, lng: -122.4194 }, // San Francisco coordinates
+                zoom: 12
+            };
+            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        }
+
+        // PWA installation
+        let deferredPrompt;
+        const installButton = document.getElementById('installApp');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                deferredPrompt = null;
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+        });
+    </script>
 </body>
 </html>
