@@ -1,217 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Clone Enhanced</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>YouTube Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <style>
         .slider-container {
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
+            width: 100%;
+            max-width: 800px; /* Ajusta el tamaño según sea necesario */
+            margin: auto;
         }
         .slider-content {
             display: flex;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease-in-out;
         }
-        .video-card {
-            flex: 0 0 auto;
-            width: 300px;
-            margin-right: 16px;
-        }
-        .short-card {
-            flex: 0 0 auto;
-            width: 150px;
-            margin-right: 16px;
-        }
-        .sponsor-card {
-            flex: 0 0 auto;
-            width: 200px;
-            margin-right: 16px;
-        }
-        .slider-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .slider-button-left {
-            left: 10px;
-        }
-        .slider-button-right {
-            right: 10px;
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .animate-slide-up {
-            animation: slideUp 0.5s ease-in-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .video-card, .short-card {
+            min-width: 300px; /* Ajusta el tamaño según sea necesario */
+            margin-right: 10px; /* Espaciado entre elementos */
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <header class="sticky top-0 z-10 bg-white border-b animate-fade-in">
-        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-            <svg class="w-24 h-8 text-red-600" fill="currentColor" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000" />
-                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white" />
-            </svg>
-            <div class="flex-1 max-w-xl mx-4">
-                <input type="search" placeholder="Search" class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <button class="p-2 rounded-full hover:bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-            </button>
-            <button id="installApp" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Install App
-            </button>
-        </div>
+<body class="bg-gray-100">
+
+    <header class="bg-gray-800 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">YouTube Clone</h1>
     </header>
 
-    <main class="flex-grow">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            <!-- Banner Carousel -->
-            <div class="relative mb-8 h-40 sm:h-64 bg-gray-200 rounded-lg overflow-hidden animate-fade-in">
-                <div class="absolute inset-0 flex items-center justify-between px-4">
-                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="text-2xl font-bold text-white">Banner Carousel</span>
-                </div>
-            </div>
-
-            <!-- YouTube Videos Section -->
-            <div class="mb-8 animate-slide-up">
+    <main class="py-6">
+        <div class="container mx-auto px-4">
+            <!-- Videos Section -->
+            <div class="mb-8">
                 <h2 class="text-2xl font-bold mb-4">Videos</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="videosSlider">
-                        <!-- Video cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="videosSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="videosSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    <div class="slider-content" id="videosSlider"></div>
+                    <button class="slider-button slider-button-left" id="videosSliderLeft">&lt;</button>
+                    <button class="slider-button slider-button-right" id="videosSliderRight">&gt;</button>
                 </div>
             </div>
 
             <!-- Shorts Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+            <div class="mb-8">
                 <h2 class="text-2xl font-bold mb-4">Shorts</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="shortsSlider">
-                        <!-- Short cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="shortsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="shortsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    <div class="slider-content" id="shortsSlider"></div>
+                    <button class="slider-button slider-button-left" id="shortsSliderLeft">&lt;</button>
+                    <button class="slider-button slider-button-right" id="shortsSliderRight">&gt;</button>
                 </div>
             </div>
 
             <!-- Sponsors Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.4s;">
+            <div class="mb-8">
                 <h2 class="text-2xl font-bold mb-4">Sponsors</h2>
                 <div class="slider-container">
-                    <div class="slider-content" id="sponsorsSlider">
-                        <!-- Sponsor cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Offers Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.6s;">
-                <h2 class="text-2xl font-bold mb-4">Offers</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="p-4 border border-gray-300 rounded-lg">
-                        <h3 class="font-bold">Offer 1</h3>
-                        <p class="text-gray-600">Details about Offer 1.</p>
-                    </div>
-                    <div class="p-4 border border-gray-300 rounded-lg">
-                        <h3 class="font-bold">Offer 2</h3>
-                        <p class="text-gray-600">Details about Offer 2.</p>
-                    </div>
-                    <div class="p-4 border border-gray-300 rounded-lg">
-                        <h3 class="font-bold">Offer 3</h3>
-                        <p class="text-gray-600">Details about Offer 3.</p>
-                    </div>
+                    <div class="slider-content" id="sponsorsSlider"></div>
+                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">&lt;</button>
+                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">&gt;</button>
                 </div>
             </div>
         </div>
     </main>
 
     <footer class="bg-gray-800 text-white py-4">
-        <div class="max-w-7xl mx-auto px-4 text-center">
+        <div class="text-center">
             <p>&copy; 2024 YouTube Clone. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // JavaScript for sliders
         let videosIndex = 0;
-        const videosSlider = document.getElementById('videosSlider');
-        const videosSliderLeft = document.getElementById('videosSliderLeft');
-        const videosSliderRight = document.getElementById('videosSliderRight');
-
         let shortsIndex = 0;
-        const shortsSlider = document.getElementById('shortsSlider');
-        const shortsSliderLeft = document.getElementById('shortsSliderLeft');
-        const shortsSliderRight = document.getElementById('shortsSliderRight');
-
         let sponsorsIndex = 0;
-        const sponsorsSlider = document.getElementById('sponsorsSlider');
-        const sponsorsSliderLeft = document.getElementById('sponsorsSliderLeft');
-        const sponsorsSliderRight = document.getElementById('sponsorsSliderRight');
 
-        // Sample data
         const videos = [
             { title: 'Video 1', thumbnail: 'https://via.placeholder.com/300' },
             { title: 'Video 2', thumbnail: 'https://via.placeholder.com/300' },
@@ -232,11 +94,10 @@
             { name: 'Sponsor 3', logo: 'https://via.placeholder.com/200' }
         ];
 
-        // Function to populate sliders
         function populateSlider(slider, items, isShort = false) {
             items.forEach(item => {
                 const card = document.createElement('div');
-                card.className = isShort ? 'short-card border rounded' : 'video-card border rounded';
+                card.className = isShort ? 'short-card video-card border rounded' : 'video-card border rounded';
                 card.innerHTML = `
                     <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-auto rounded">
                     <h3 class="font-bold mt-2">${item.title}</h3>
@@ -245,62 +106,62 @@
             });
         }
 
-        // Populate the sliders with data
+        function updateSlider(slider, index, cardWidth) {
+            slider.style.transform = `translateX(-${index * cardWidth}px)`;
+        }
+
+        const videosSlider = document.getElementById('videosSlider');
+        const shortsSlider = document.getElementById('shortsSlider');
+        const sponsorsSlider = document.getElementById('sponsorsSlider');
+
         populateSlider(videosSlider, videos);
         populateSlider(shortsSlider, shorts, true);
         populateSlider(sponsorsSlider, sponsors);
 
-        // Slider functionality
-        function slide(slider, index, itemsCount) {
-            const itemWidth = isShort ? 150 : 300; // Width of video or short cards
-            slider.style.transform = `translateX(-${index * itemWidth}px)`;
-        }
+        const videoCardWidth = 300; // Ajusta según el tamaño del video card
+        const shortCardWidth = 150; // Ajusta según el tamaño del short card
+        const sponsorCardWidth = 200; // Ajusta según el tamaño del sponsor card
 
-        videosSliderRight.addEventListener('click', () => {
+        document.getElementById('videosSliderRight').addEventListener('click', () => {
             if (videosIndex < videos.length - 1) {
                 videosIndex++;
-                slide(videosSlider, videosIndex);
+                updateSlider(videosSlider, videosIndex, videoCardWidth);
             }
         });
 
-        videosSliderLeft.addEventListener('click', () => {
+        document.getElementById('videosSliderLeft').addEventListener('click', () => {
             if (videosIndex > 0) {
                 videosIndex--;
-                slide(videosSlider, videosIndex);
+                updateSlider(videosSlider, videosIndex, videoCardWidth);
             }
         });
 
-        shortsSliderRight.addEventListener('click', () => {
+        document.getElementById('shortsSliderRight').addEventListener('click', () => {
             if (shortsIndex < shorts.length - 1) {
                 shortsIndex++;
-                slide(shortsSlider, shortsIndex);
+                updateSlider(shortsSlider, shortsIndex, shortCardWidth);
             }
         });
 
-        shortsSliderLeft.addEventListener('click', () => {
+        document.getElementById('shortsSliderLeft').addEventListener('click', () => {
             if (shortsIndex > 0) {
                 shortsIndex--;
-                slide(shortsSlider, shortsIndex);
+                updateSlider(shortsSlider, shortsIndex, shortCardWidth);
             }
         });
 
-        sponsorsSliderRight.addEventListener('click', () => {
+        document.getElementById('sponsorsSliderRight').addEventListener('click', () => {
             if (sponsorsIndex < sponsors.length - 1) {
                 sponsorsIndex++;
-                slide(sponsorsSlider, sponsorsIndex);
+                updateSlider(sponsorsSlider, sponsorsIndex, sponsorCardWidth);
             }
         });
 
-        sponsorsSliderLeft.addEventListener('click', () => {
+        document.getElementById('sponsorsSliderLeft').addEventListener('click', () => {
             if (sponsorsIndex > 0) {
                 sponsorsIndex--;
-                slide(sponsorsSlider, sponsorsIndex);
+                updateSlider(sponsorsSlider, sponsorsIndex, sponsorCardWidth);
             }
-        });
-
-        // Install App functionality (placeholder)
-        document.getElementById('installApp').addEventListener('click', () => {
-            alert('App installed!');
         });
     </script>
 </body>
