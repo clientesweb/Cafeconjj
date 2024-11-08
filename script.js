@@ -1,33 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Preloader with curtain effect
+    // Preloader
     const preloader = document.getElementById('preloader');
-    const curtainLeft = document.getElementById('curtain-left');
-    const curtainRight = document.getElementById('curtain-right');
-
     window.addEventListener('load', () => {
         setTimeout(() => {
-            preloader.style.display = 'none';
-            curtainLeft.classList.add('curtain-open');
-            curtainRight.classList.add('curtain-open');
+            preloader.style.opacity = '0';
             setTimeout(() => {
-                curtainLeft.style.display = 'none';
-                curtainRight.style.display = 'none';
-            }, 1000);
+                preloader.style.display = 'none';
+            }, 500);
         }, 1000);
     });
 
-    // Top Banner with improved message rotation
+    // Top Banner with rotating messages and call-to-action buttons
     const bannerMessages = [
-        "Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil",
-        "Sintonízanos de lunes a viernes a las 7:00 AM",
-        "Descarga nuestra app para estar siempre conectado",
-        "Sigue a Jimmy Jairala en todas nuestras redes sociales"
+        {
+            text: "Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil",
+            cta: "Ver Noticias",
+            link: "#noticias"
+        },
+        {
+            text: "Sintonízanos de lunes a viernes a las 7:00 AM",
+            cta: "Ver Programación",
+            link: "#playlists"
+        },
+        {
+            text: "Descarga nuestra app para estar siempre conectado",
+            cta: "Descargar App",
+            link: "#descargar-app"
+        },
+        {
+            text: "Sigue a Jimmy Jairala en todas nuestras redes sociales",
+            cta: "Seguir",
+            link: "https://www.instagram.com/uncafeconjj"
+        }
     ];
     const bannerElement = document.getElementById('banner-messages');
     let currentMessageIndex = 0;
 
     function setupBannerMessages() {
-        bannerElement.innerHTML = bannerMessages.map(message => `<div class="flex-shrink-0 w-full">${message}</div>`).join('');
+        bannerElement.innerHTML = bannerMessages.map(message => `
+            <div class="flex-shrink-0 w-full flex justify-between items-center">
+                <span>${message.text}</span>
+                <a href="${message.link}" class="ml-4 bg-white text-primary px-3 py-1 rounded-full text-sm font-bold hover:bg-opacity-90 transition-colors duration-300">${message.cta}</a>
+            </div>
+        `).join('');
     }
 
     function rotateBannerMessage() {
@@ -203,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newsletterForm.reset();
     });
 
-    // New Reviews Section
+    // Reviews Section
     const reviews = [
         { name: "María L.", rating: 5, text: "Un Café Con JJ es mi fuente confiable de noticias cada mañana. ¡Excelente programa!" },
         { name: "Carlos R.", rating: 4, text: "Jimmy Jairala ofrece una perspectiva única sobre los eventos actuales. Muy recomendado." },
@@ -252,4 +267,25 @@ document.addEventListener('DOMContentLoaded', () => {
         currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
         showReview(currentReviewIndex);
     }, 5000); // Auto-rotate reviews every 5 seconds
+
+    // Fade-in effect for sections
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    fadeInElements.forEach(element => {
+        observer.observe(element);
+    });
 });
