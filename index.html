@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Un Cafe Con JJ | Noticiero</title>
+    <title>Un Cafe Con JJ | Noticiero Digital</title>
     <meta name="description" content="El noticiero digital más escuchado de Guayaquil con el Precandidato Jimmy Jairala!">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -25,36 +25,97 @@
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
                     },
                 }
             }
         }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style type="text/tailwindcss">
         @layer utilities {
             .bg-gradient-primary {
                 background-image: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(139, 69, 19, 0.8), rgba(255, 255, 255, 0.8));
             }
-            .bg-gradient-secondary {
-                background-image: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(255, 255, 255, 0.8));
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+            .pulse {
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            @keyframes pulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: .5;
+                }
             }
         }
     </style>
 </head>
-<body class="font-sans bg-gradient-secondary text-gray-800">
-    <header class="sticky top-0 z-50 bg-primary bg-opacity-90 backdrop-blur-sm text-white shadow-md">
+<body class="font-sans bg-gray-100 text-gray-800 relative">
+    <!-- SVG Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none opacity-5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+                <pattern id="news-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <text x="10" y="50" font-family="Arial" font-size="20" fill="#333">NOTICIAS</text>
+                    <text x="50" y="80" font-family="Arial" font-size="15" fill="#666">ECUADOR</text>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#news-pattern)" />
+        </svg>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <img src="images/logo.png" alt="Logo Un Café Con JJ" class="w-32 h-32 pulse">
+    </div>
+
+    <!-- Top Banner -->
+    <div class="bg-primary text-white py-2 px-4 text-center relative overflow-hidden">
+        <div id="banner-text" class="inline-block whitespace-nowrap animate-marquee">
+            Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo de Un Café Con JJ" class="h-16 transition-transform duration-300 hover:scale-105">
+            <div class="flex items-center">
+                <img src="images/logo.png" alt="Logo de Un Café Con JJ" class="h-16 mr-4 transition-transform duration-300 hover:scale-105">
+                <h1 class="text-2xl font-bold text-primary hidden md:block">Un Café Con JJ</h1>
             </div>
-            <button id="install-button" class="hidden bg-gradient-primary text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                <i class="fas fa-download mr-2"></i> Instalar Un Café Con JJ
-            </button>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#playlists" class="text-gray-600 hover:text-primary transition-colors duration-300">Inicio</a>
+                <a href="#noticias" class="text-gray-600 hover:text-primary transition-colors duration-300">Noticias</a>
+                <a href="#contacto" class="text-gray-600 hover:text-primary transition-colors duration-300">Contacto</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex space-x-2">
+                    <a href="https://facebook.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://twitter.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-600 transition-colors duration-300">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-pink-600 hover:text-pink-800 transition-colors duration-300">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-red-600 hover:text-red-800 transition-colors duration-300">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <button id="install-button" class="hidden bg-primary text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 hover:bg-opacity-90 hover:scale-105">
+                    <i class="fas fa-download mr-2"></i> Instalar App
+                </button>
+            </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 relative z-10">
         <section class="mb-12">
             <div class="relative overflow-hidden rounded-xl shadow-2xl">
                 <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
@@ -71,12 +132,12 @@
         </section>
 
         <section id="playlists" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6">En Vivo</h2>
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">En Vivo</h2>
             <div id="live-video" class="aspect-w-16 aspect-h-9 mb-8">
                 <div id="live-video-container" class="rounded-xl overflow-hidden shadow-lg"></div>
             </div>
 
-            <h2 class="text-3xl font-bold text-center mb-6">Programas</h2>
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Programas Recientes</h2>
             <div class="overflow-x-auto pb-4">
                 <div id="playlist-container" class="flex space-x-4">
                     <!-- Los videos se cargarán aquí dinámicamente -->
@@ -85,57 +146,97 @@
         </section>
 
         <section id="instagram-videos" class="mb-12">
-            <h2 class="text-3xl font-bold text-center mb-6">Nuestros Reels</h2>
-            <div class="overflow-x-auto pb-4">
-                <div class="flex space-x-4">
-                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
-                        <iframe src="https://www.instagram.com/reel/DAePsIUR3Hm/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
-                    </div>
-                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
-                        <iframe src="https://www.instagram.com/reel/DAg1iizxm1z/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
-                    </div>
-                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
-                        <iframe src="https://www.instagram.com/reel/DAg1NwUR4m2/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
-                    </div>
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Nuestros Reels</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="instagram-video-item aspect-[9/16] w-full">
+                    <iframe src="https://www.instagram.com/reel/DAePsIUR3Hm/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
+                </div>
+                <div class="instagram-video-item aspect-[9/16] w-full">
+                    <iframe src="https://www.instagram.com/reel/DAg1iizxm1z/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
+                </div>
+                <div class="instagram-video-item aspect-[9/16] w-full">
+                    <iframe src="https://www.instagram.com/reel/DAg1NwUR4m2/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
                 </div>
             </div>
         </section>
+
+        <section id="contacto" class="mb-12 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Contáctanos</h2>
+            <form id="contact-form" class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre</label>
+                    <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+                <div class="mb-6">
+                    <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Mensaje</label>
+                    <textarea id="message" name="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" required></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-primary hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
+                        Enviar Mensaje
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="boletin" class="mb-12 bg-gradient-primary text-white rounded-xl shadow-lg p-8">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6">Suscríbete a Nuestro Boletín</h2>
+            <form id="newsletter-form" class="max-w-md mx-auto">
+                <div class="flex items-center border-b border-white py-2">
+                    <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Tu nombre" aria-label="Nombre completo">
+                </div>
+                <div class="flex items-center border-b border-white py-2 mt-4">
+                    <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none" type="tel" placeholder="Tu número de WhatsApp" aria-label="Número de WhatsApp">
+                </div>
+                <div class="flex justify-center mt-6">
+                    <button class="bg-white hover:bg-gray-100 text-primary font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300" type="submit">
+                        Suscribirse
+                    </button>
+                </div>
+            </form>
+        </section>
     </main>
 
-    <footer class="bg-gradient-primary text-white py-12">
+    <footer class="bg-primary text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <img src="images/logo.png" alt="Un Café con JJ" class="h-16 mb-4 transition-transform duration-300 hover:scale-105">
-                    <p class="text-sm">Descubre que sucede en Ecuador y todo el mundo en el noticiero digital más visto de Guayaquil.</p>
+                    <img src="images/logo.png" alt="Un Café con JJ" class="h-24 mb-4 mx-auto md:mx-0">
+                    <p class="text-center md:text-left">Descubre que sucede en Ecuador y todo el mundo en el noticiero digital más visto de Guayaquil.</p>
+                </div>
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#playlists" class="hover:text-secondary transition-colors duration-300">Inicio</a></li>
+                        <li><a href="#noticias" class="hover:text-secondary transition-colors duration-300">Noticias</a></li>
+                        <li><a href="#contacto" class="hover:text-secondary transition-colors duration-300">Contacto</a></li>
+                        <li><a href="#boletin" class="hover:text-secondary transition-colors duration-300">Boletín</a></li>
+                    </ul>
                 </div>
                 <div>
-                    <h3 class="text-xl font-semibold mb-4">Conéctate con Nosotros</h3>
-                    <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/jimmyjairala/" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/uncafeconjj" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/uncafeconjjoficial?igsh=MW9idW52eDAxZDd5cQ==" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com/@jimmyjairala?si=WzGRe9DqJ74pUqsz" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Suscríbete a nuestro canal de YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4">Encuéntranos</h3>
-                    <div class="rounded-xl overflow-hidden shadow-lg">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15769.14526397902!2d-79.8899031!3d-2.1891341!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d13cbe855805f%3A0x8015a492f4fca473!2sGuayaquil%2C%20Ecuador!5e0!3m2!1ses!2ses!4v1695866437905!5m2!1ses!2ses"
-                            width="100%" 
-                            height="200" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            title="Ubicación de Un Café Con JJ">
-                        </iframe>
+                    <h3 class="text-2xl font-bold mb-4 text-center md:text-left">Síguenos</h3>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="https://facebook.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://twitter.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/uncafeconjj" target="_blank" rel="noopener noreferrer" class="text-2xl hover:text-secondary transition-colors duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center text-sm">
-                <p>Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener" class="hover:text-secondary transition-colors duration-300">Duality Domain</a> | &copy; 2024 Todos los derechos reservados.</p>
+            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center">
+                <p>&copy; 2024 Un Café Con JJ. Todos los derechos reservados. | Desarrollado por <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener" class="text-secondary hover:underline">Duality Domain</a></p>
             </div>
         </div>
     </footer>
@@ -162,12 +263,27 @@
         </div>
     </div>
 
-    <nav class="fixed bottom-0 left-0 right-0 bg-primary bg-opacity-90 backdrop-blur-sm text-white py-2 px-4 flex justify-around items-center z-40">
-        <a href="#playlists" class="flex flex-col items-center text-xs"><i class="fas fa-home text-lg mb-1"></i><span>Inicio</span></a>
-        <a href="#features" class="flex flex-col items-center text-xs"><i class="fas fa-calendar-alt text-lg mb-1"></i><span>Eventos</span></a>
-        <a href="#shorts-section" class="flex flex-col items-center text-xs"><i class="fas fa-tags text-lg mb-1"></i><span>Ofertas</span></a>
-        <a href="#sponsors-section" class="flex flex-col items-center text-xs"><i class="fas fa-star text-lg mb-1"></i><span>Patrocinadores</span></a>
-        <a href="#cta" class="flex flex-col items-center text-xs"><i class="fas fa-envelope text-lg mb-1"></i><span>Contacto</span></a>
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg py-2 px-4 flex justify-around items-center z-40">
+        <a href="#playlists" class="flex flex-col items-center text-xs text-gray-600 hover:text-primary transition-colors duration-300">
+            <i class="fas fa-home text-xl mb-1"></i>
+            <span>Inicio</span>
+        </a>
+        <a href="#noticias" class="flex flex-col items-center text-xs text-gray-600 hover:text-primary transition-colors duration-300">
+            <i class="fas fa-newspaper text-xl mb-1"></i>
+            <span>Noticias</span>
+        </a>
+        <a href="#instagram-videos" class="flex flex-col items-center text-xs text-gray-600 hover:text-primary transition-colors duration-300">
+            <i class="fab fa-instagram text-xl mb-1"></i>
+            <span>Reels</span>
+        </a>
+        <a href="#contacto" class="flex flex-col items-center text-xs text-gray-600 hover:text-primary transition-colors duration-300">
+            <i class="fas fa-envelope text-xl mb-1"></i>
+            <span>Contacto</span>
+        </a>
+        <a href="#boletin" class="flex flex-col items-center text-xs text-gray-600 hover:text-primary transition-colors duration-300">
+            <i class="fas fa-bell text-xl mb-1"></i>
+            <span>Boletín</span>
+        </a>
     </nav>
 
     <script src="script.js"></script>
