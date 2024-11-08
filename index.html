@@ -1,363 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Clone Enhanced</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        .slider-container {
-            overflow-x: hidden;
-            position: relative;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Un Cafe Con JJ | Noticiero</title>
+    <meta name="description" content="El noticiero digital más escuchado de Guayaquil con el Precandidato Jimmy Jairala!">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#8B4513">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Un Cafe Con JJ">
+    <link rel="canonical" href="https://uncafeconjj.com">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#FFD700',
+                        accent: '#FFFFFF',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
         }
-        .slider-content {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
-        .video-card {
-            flex: 0 0 auto;
-            width: 300px;
-            margin-right: 16px;
-        }
-        .short-card {
-            flex: 0 0 auto;
-            width: 150px;
-            margin-right: 16px;
-        }
-        .sponsor-card {
-            flex: 0 0 auto;
-            width: 200px;
-            margin-right: 16px;
-        }
-        .slider-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .slider-button-left {
-            left: 10px;
-        }
-        .slider-button-right {
-            right: 10px;
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .animate-slide-up {
-            animation: slideUp 0.5s ease-in-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .bg-gradient-primary {
+                background-image: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(139, 69, 19, 0.8), rgba(255, 255, 255, 0.8));
+            }
+            .bg-gradient-secondary {
+                background-image: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(255, 255, 255, 0.8));
+            }
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <header class="sticky top-0 z-10 bg-white border-b animate-fade-in">
-        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
-            <svg class="w-24 h-8 text-red-600" fill="currentColor" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 2.24288e-07 14.285 0 14.285 0C14.285 0 5.35042 2.24288e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C2.24288e-07 5.35042 0 10 0 10C0 10 2.24288e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z" fill="#FF0000" />
-                <path d="M11.4253 14.2854L18.8477 10.0004L11.4253 5.71533V14.2854Z" fill="white" />
-            </svg>
-            <div class="flex-1 max-w-xl mx-4">
-                <input type="search" placeholder="Search" class="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<body class="font-sans bg-gradient-secondary text-gray-800">
+    <header class="sticky top-0 z-50 bg-primary bg-opacity-90 backdrop-blur-sm text-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo de Un Café Con JJ" class="h-16 transition-transform duration-300 hover:scale-105">
             </div>
-            <button class="p-2 rounded-full hover:bg-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-            </button>
-            <button id="installApp" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Install App
+            <button id="install-button" class="hidden bg-gradient-primary text-white px-4 py-2 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                <i class="fas fa-download mr-2"></i> Instalar Un Café Con JJ
             </button>
         </div>
     </header>
 
-    <main class="flex-grow">
-        <div class="max-w-7xl mx-auto px-4 py-8">
-            <!-- Banner Carousel -->
-            <div class="relative mb-8 h-40 sm:h-64 bg-gray-200 rounded-lg overflow-hidden animate-fade-in">
-                <div class="absolute inset-0 flex items-center justify-between px-4">
-                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="p-2 rounded-full bg-white/80 hover:bg-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <div class="relative overflow-hidden rounded-xl shadow-2xl">
+                <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+                    <img src="images/uncafeconjj (1).png" alt="Imagen destacada 1" class="w-full h-auto object-cover">
+                    <!-- Agrega más imágenes aquí si es necesario -->
                 </div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <span class="text-2xl font-bold text-white">Banner Carousel</span>
-                </div>
+                <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 rounded-full p-2 transition-all duration-300" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 rounded-full p-2 transition-all duration-300" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="playlists" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-6">En Vivo</h2>
+            <div id="live-video" class="aspect-w-16 aspect-h-9 mb-8">
+                <div id="live-video-container" class="rounded-xl overflow-hidden shadow-lg"></div>
             </div>
 
-            <!-- YouTube Videos Section -->
-            <div class="mb-8 animate-slide-up">
-                <h2 class="text-2xl font-bold mb-4">Videos</h2>
-                <div class="slider-container">
-                    <div class="slider-content" id="videosSlider">
-                        <!-- Video cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="videosSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="videosSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+            <h2 class="text-3xl font-bold text-center mb-6">Programas</h2>
+            <div class="overflow-x-auto pb-4">
+                <div id="playlist-container" class="flex space-x-4">
+                    <!-- Los videos se cargarán aquí dinámicamente -->
                 </div>
             </div>
+        </section>
 
-            <!-- Shorts Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.2s;">
-                <h2 class="text-2xl font-bold mb-4">Shorts</h2>
-                <div class="slider-container">
-                    <div class="slider-content" id="shortsSlider">
-                        <!-- Short cards will be inserted here by JavaScript -->
+        <section id="instagram-videos" class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-6">Nuestros Reels</h2>
+            <div class="overflow-x-auto pb-4">
+                <div class="flex space-x-4">
+                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
+                        <iframe src="https://www.instagram.com/reel/DAePsIUR3Hm/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
                     </div>
-                    <button class="slider-button slider-button-left" id="shortsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="shortsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
+                        <iframe src="https://www.instagram.com/reel/DAg1iizxm1z/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
+                    </div>
+                    <div class="instagram-video-item w-72 h-128 flex-shrink-0">
+                        <iframe src="https://www.instagram.com/reel/DAg1NwUR4m2/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
+                    </div>
                 </div>
             </div>
-
-            <!-- Sponsors Section -->
-            <div class="mb-8 animate-slide-up" style="animation-delay: 0.4s;">
-                <h2 class="text-2xl font-bold mb-4">Our Sponsors</h2>
-                <div class="slider-container">
-                    <div class="slider-content" id="sponsorsSlider">
-                        <!-- Sponsor cards will be inserted here by JavaScript -->
-                    </div>
-                    <button class="slider-button slider-button-left" id="sponsorsSliderLeft">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="slider-button slider-button-right" id="sponsorsSliderRight">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="bg-gray-900 text-white py-12 animate-fade-in">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer class="bg-gradient-primary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">About</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">About Us</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Press</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Copyright</a></li>
-                    </ul>
+                    <img src="images/logo.png" alt="Un Café con JJ" class="h-16 mb-4 transition-transform duration-300 hover:scale-105">
+                    <p class="text-sm">Descubre que sucede en Ecuador y todo el mundo en el noticiero digital más visto de Guayaquil.</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Terms</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
-                    </ul>
+                    <h3 class="text-xl font-semibold mb-4">Conéctate con Nosotros</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/jimmyjairala/" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/uncafeconjj" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/uncafeconjjoficial?igsh=MW9idW52eDAxZDd5cQ==" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Síguenos en Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@jimmyjairala?si=WzGRe9DqJ74pUqsz" target="_blank" rel="noopener" class="text-2xl hover:text-secondary transition-colors duration-300" aria-label="Suscríbete a nuestro canal de YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-gray-300">Help Center</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Creator Support</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Our Location</h3>
-                    <div id="map" class="h-48 rounded-lg overflow-hidden"></div>
+                    <h3 class="text-xl font-semibold mb-4">Encuéntranos</h3>
+                    <div class="rounded-xl overflow-hidden shadow-lg">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15769.14526397902!2d-79.8899031!3d-2.1891341!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d13cbe855805f%3A0x8015a492f4fca473!2sGuayaquil%2C%20Ecuador!5e0!3m2!1ses!2ses!4v1695866437905!5m2!1ses!2ses"
+                            width="100%" 
+                            height="200" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de Un Café Con JJ">
+                        </iframe>
+                    </div>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
-                © 2023 YouTube Clone Enhanced. All rights reserved.
+            <div class="mt-8 pt-8 border-t border-white border-opacity-20 text-center text-sm">
+                <p>Powered by <a href="https://dualitydomain.github.io/Dualitydomain/" target="_blank" rel="noopener" class="hover:text-secondary transition-colors duration-300">Duality Domain</a> | &copy; 2024 Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t py-2 md:hidden animate-fade-in">
-        <div class="flex justify-around">
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                <span class="text-xs mt-1">Home</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                </svg>
-                <span class="text-xs mt-1">Explore</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                <span class="text-xs mt-1">Create</span>
-            </button>
-            <button class="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10V8a1 1 0 011-1h6a1 1 0 011 1v2z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 6.618V6a1 1 0 00-1-1H4a1 1 0 00-1 1v.618a1 1 0 00.553.894L8 10v5a1 1 0 001 1h6a1 1 0 001-1v-5z" />
-                </svg>
-                <span class="text-xs mt-1">Subscriptions</span>
+    <div class="fixed bottom-20 right-6 z-50">
+        <button id="whatsappBtn" class="bg-green-500 text-white rounded-full p-4 shadow-lg transition-transform duration-300 hover:scale-110" aria-label="Chatea con UnCafeConJJ en WhatsApp">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </button>
+    </div>
+
+    <div id="whatsappModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-primary">Chatea con Un Café Con JJ en WhatsApp</h2>
+                <button class="text-gray-500 hover:text-gray-700" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="mb-4">Escribe tu mensaje:</p>
+            <textarea id="whatsappMessage" class="w-full p-2 border border-gray-300 rounded mb-4" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+            <button id="sendMessageBtn" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors duration-300">
+                <i class="fab fa-whatsapp mr-2"></i> Enviar mensaje
             </button>
         </div>
+    </div>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-primary bg-opacity-90 backdrop-blur-sm text-white py-2 px-4 flex justify-around items-center z-40">
+        <a href="#playlists" class="flex flex-col items-center text-xs"><i class="fas fa-home text-lg mb-1"></i><span>Inicio</span></a>
+        <a href="#features" class="flex flex-col items-center text-xs"><i class="fas fa-calendar-alt text-lg mb-1"></i><span>Eventos</span></a>
+        <a href="#shorts-section" class="flex flex-col items-center text-xs"><i class="fas fa-tags text-lg mb-1"></i><span>Ofertas</span></a>
+        <a href="#sponsors-section" class="flex flex-col items-center text-xs"><i class="fas fa-star text-lg mb-1"></i><span>Patrocinadores</span></a>
+        <a href="#cta" class="flex flex-col items-center text-xs"><i class="fas fa-envelope text-lg mb-1"></i><span>Contacto</span></a>
     </nav>
 
-    <!-- WhatsApp Floating Button -->
-    <button class="fixed bottom-20 right-4 md:bottom-4 p-3 bg-green-500 hover:bg-green-600 rounded-full shadow-lg animate-fade-in">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-    </button>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
-    <script>
-        function createVideoCard(title) {
-            return `
-                <div class="video-card bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="aspect-w-16 aspect-h-9 bg-gray-200 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold truncate">${title}</h3>
-                        <p class="text-sm text-gray-500">Channel Name</p>
-                    </div>
-                </div>
-            `;
-        }
-
-        function createShortCard(title) {
-            return `
-                <div class="short-card">
-                    <div class="aspect-w-9 aspect-h-16 bg-gray-200 rounded-md mb-2 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white absolute inset-0 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-sm truncate">${title}</h3>
-                </div>
-            `;
-        }
-
-        function createSponsorCard(name) {
-            return `
-                <div class="sponsor-card bg-white rounded-lg shadow-md overflow-hidden p-4">
-                    <div class="h-24 bg-gray-200 rounded-md mb-2 flex items-center justify-center">
-                        <span class="text-gray-500 font-semibold">${name} Logo</span>
-                    </div>
-                    <h3 class="font-semibold text-sm text-center">${name}</h3>
-                </div>
-            `;
-        }
-
-        const videosSlider = document.getElementById('videosSlider');
-        const shortsSlider = document.getElementById('shortsSlider');
-        const sponsorsSlider = document.getElementById('sponsorsSlider');
-
-        // Populate videos
-        for (let i = 1; i <= 10; i++) {
-            videosSlider.innerHTML += createVideoCard(`Video Title ${i}`);
-        }
-
-        // Populate shorts
-        for (let i = 1; i <= 10; i++) {
-            shortsSlider.innerHTML += createShortCard(`Short Title ${i}`);
-        }
-
-        // Populate sponsors
-        const sponsors = ['Sponsor A', 'Sponsor B', 'Sponsor C', 'Sponsor D', 'Sponsor E', 'Sponsor F'];
-        sponsors.forEach(sponsor => {
-            sponsorsSlider.innerHTML += createSponsorCard(sponsor);
-        });
-
-        function initSlider(sliderId, leftButtonId, rightButtonId) {
-            const slider = document.getElementById(sliderId);
-            const leftButton = document.getElementById(leftButtonId);
-            const rightButton = document.getElementById(rightButtonId);
-            let scrollAmount = 0;
-
-            leftButton.addEventListener('click', () => {
-                scrollAmount = Math.max(scrollAmount - 300, 0);
-                slider.style.transform = `translateX(-${scrollAmount}px)`;
-            });
-
-            rightButton.addEventListener('click', () => {
-                scrollAmount = Math.min(scrollAmount + 300, slider.scrollWidth - slider.clientWidth);
-                slider.style.transform = `translateX(-${scrollAmount}px)`;
-            });
-        }
-
-        initSlider('videosSlider', 'videosSliderLeft', 'videosSliderRight');
-        initSlider('shortsSlider', 'shortsSliderLeft', 'shortsSliderRight');
-        initSlider('sponsorsSlider', 'sponsorsSliderLeft', 'sponsorsSliderRight');
-
-        function initMap() {
-            const mapOptions = {
-                center: { lat: 37.7749, lng: -122.4194 }, // San Francisco coordinates
-                zoom: 12
-            };
-            const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        }
-
-        // PWA installation
-        let deferredPrompt;
-        const installButton = document.getElementById('installApp');
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installButton.style.display = 'block';
-        });
-
-        installButton.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                console.log(`User response to the install prompt: ${outcome}`);
-                deferredPrompt = null;
-            }
-        });
-
-        window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
