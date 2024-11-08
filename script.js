@@ -1,11 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Preloader
+    // Preloader with curtain effect
     const preloader = document.getElementById('preloader');
+    const curtainLeft = document.getElementById('curtain-left');
+    const curtainRight = document.getElementById('curtain-right');
+
     window.addEventListener('load', () => {
-        preloader.style.display = 'none';
+        setTimeout(() => {
+            preloader.style.display = 'none';
+            curtainLeft.classList.add('curtain-open');
+            curtainRight.classList.add('curtain-open');
+            setTimeout(() => {
+                curtainLeft.style.display = 'none';
+                curtainRight.style.display = 'none';
+            }, 1000);
+        }, 1000);
     });
 
-    // Top Banner with rotating messages
+    // Top Banner with improved message rotation
     const bannerMessages = [
         "Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil",
         "Sintonízanos de lunes a viernes a las 7:00 AM",
@@ -15,13 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const bannerElement = document.getElementById('banner-messages');
     let currentMessageIndex = 0;
 
-    function rotateBannerMessage() {
-        bannerElement.textContent = bannerMessages[currentMessageIndex];
-        currentMessageIndex = (currentMessageIndex + 1) % bannerMessages.length;
+    function setupBannerMessages() {
+        bannerElement.innerHTML = bannerMessages.map(message => `<div class="flex-shrink-0 w-full">${message}</div>`).join('');
     }
 
+    function rotateBannerMessage() {
+        currentMessageIndex = (currentMessageIndex + 1) % bannerMessages.length;
+        bannerElement.style.transform = `translateX(-${currentMessageIndex * 100}%)`;
+    }
+
+    setupBannerMessages();
     setInterval(rotateBannerMessage, 5000); // Rotate message every 5 seconds
-    rotateBannerMessage(); // Show first message immediately
 
     // Carrusel de imágenes
     const carousel = document.getElementById('carousel');
@@ -163,9 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Formulario de contacto
     const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit',
-
- (e) => {
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
@@ -189,4 +202,54 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(url, '_blank');
         newsletterForm.reset();
     });
+
+    // New Reviews Section
+    const reviews = [
+        { name: "María L.", rating: 5, text: "Un Café Con JJ es mi fuente confiable de noticias cada mañana. ¡Excelente programa!" },
+        { name: "Carlos R.", rating: 4, text: "Jimmy Jairala ofrece una perspectiva única sobre los eventos actuales. Muy recomendado." },
+        { name: "Ana S.", rating: 5, text: "Informativo, entretenido y siempre al día. No me pierdo ningún episodio." },
+        { name: "Pedro M.", rating: 4, text: "La mejor manera de comenzar el día es con Un Café Con JJ. Noticias frescas y análisis profundo." },
+        { name: "Lucía T.", rating: 5, text: "Un programa que realmente se preocupa por mantener a la comunidad informada. ¡Gracias por su dedicación!" }
+    ];
+
+    const reviewsContainer = document.getElementById('reviews-container');
+    const prevReviewBtn = document.getElementById('prevReview');
+    const nextReviewBtn = document.getElementById('nextReview');
+    let currentReviewIndex = 0;
+
+    function setupReviews() {
+        reviewsContainer.innerHTML = reviews.map(review => `
+            <div class="flex-shrink-0 w-full px-4">
+                <div class="bg-gray-100 p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400">
+                            ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                        </div>
+                        <div class="ml-2 font-bold">${review.name}</div>
+                    </div>
+                    <p class="text-gray-600">${review.text}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function showReview(index) {
+        reviewsContainer.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prevReviewBtn.addEventListener('click', () => {
+        currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+        showReview(currentReviewIndex);
+    });
+
+    nextReviewBtn.addEventListener('click', () => {
+        currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+        showReview(currentReviewIndex);
+    });
+
+    setupReviews();
+    setInterval(() => {
+        currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+        showReview(currentReviewIndex);
+    }, 5000); // Auto-rotate reviews every 5 seconds
 });
