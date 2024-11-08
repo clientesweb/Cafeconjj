@@ -83,7 +83,7 @@
 
     <!-- Top Banner -->
     <div class="bg-primary text-white py-2 px-4 overflow-hidden">
-        <div class="animate-marquee whitespace-nowrap">
+        <div id="banner-messages" class="animate-marquee whitespace-nowrap">
             Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil
         </div>
     </div>
@@ -137,7 +137,9 @@
         <section id="playlists" class="mb-12">
             <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">En Vivo</h2>
             <div id="live-video" class="aspect-w-16 aspect-h-9 mb-8">
-                <div id="live-video-container" class="rounded-xl overflow-hidden shadow-lg" style="height: 500px;"></div>
+                <div id="live-video-container" class="rounded-xl overflow-hidden shadow-lg" style="width: 100%; padding-bottom: 56.25%; position: relative;">
+                    <!-- The iframe will be inserted here by JavaScript -->
+                </div>
             </div>
 
             <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Programas Recientes</h2>
@@ -178,6 +180,31 @@
                     </div>
                 </div>
                 <img src="images/app-mockup.png" alt="Un Café Con JJ App" class="w-full max-w-xs rounded-xl shadow-lg">
+            </div>
+        </section>
+
+        <section id="programa-banner" class="mb-12 relative">
+            <img src="images/programa-banner.jpg" alt="Un Café Con JJ - Programa" class="w-full h-auto rounded-xl shadow-lg">
+            <a href="https://www.youtube.com/channel/UCYUfYC2ZzWBmvfRp8ByQweQ" target="_blank" rel="noopener noreferrer" class="absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                Ver en YouTube
+            </a>
+        </section>
+
+        <section id="faqs" class="mb-12 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Preguntas Frecuentes</h2>
+            <div class="space-y-4">
+                <details class="bg-gray-100 p-4 rounded-lg">
+                    <summary class="font-bold cursor-pointer">¿Cuál es el horario de transmisión de Un Café Con JJ?</summary>
+                    <p class="mt-2">Un Café Con JJ se transmite de lunes a viernes a las 7:00 AM hora de Ecuador.</p>
+                </details>
+                <details class="bg-gray-100 p-4 rounded-lg">
+                    <summary class="font-bold cursor-pointer">¿Cómo puedo participar en el programa?</summary>
+                    <p class="mt-2">Puedes participar enviando tus comentarios y preguntas a través de nuestras redes sociales o usando el formulario de contacto en nuestra página web.</p>
+                </details>
+                <details class="bg-gray-100 p-4 rounded-lg">
+                    <summary class="font-bold cursor-pointer">¿Dónde puedo ver los episodios anteriores?</summary>
+                    <p class="mt-2">Todos nuestros episodios anteriores están disponibles en nuestro canal de YouTube y en la sección de "Programas Recientes" de esta página web.</p>
+                </details>
             </div>
         </section>
 
