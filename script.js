@@ -5,9 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
         preloader.style.display = 'none';
     });
 
-    // Top Banner
-    const bannerText = document.querySelector('.animate-marquee');
-    bannerText.style.animationDuration = `${bannerText.offsetWidth / 100}s`;
+    // Top Banner with rotating messages
+    const bannerMessages = [
+        "Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil",
+        "Sintonízanos de lunes a viernes a las 7:00 AM",
+        "Descarga nuestra app para estar siempre conectado",
+        "Sigue a Jimmy Jairala en todas nuestras redes sociales"
+    ];
+    const bannerElement = document.getElementById('banner-messages');
+    let currentMessageIndex = 0;
+
+    function rotateBannerMessage() {
+        bannerElement.textContent = bannerMessages[currentMessageIndex];
+        currentMessageIndex = (currentMessageIndex + 1) % bannerMessages.length;
+    }
+
+    setInterval(rotateBannerMessage, 5000); // Rotate message every 5 seconds
+    rotateBannerMessage(); // Show first message immediately
 
     // Carrusel de imágenes
     const carousel = document.getElementById('carousel');
@@ -49,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const liveContainer = document.getElementById('live-video-container');
         liveContainer.innerHTML = `
             <iframe 
-                class="w-full h-full"
+                class="absolute top-0 left-0 w-full h-full"
                 src="https://www.youtube.com/embed/${video.snippet.resourceId.videoId}?autoplay=1" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
@@ -149,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Formulario de contacto
     const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit',
+
+ (e) => {
         e.preventDefault();
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
