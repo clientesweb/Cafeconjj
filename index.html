@@ -59,10 +59,37 @@
                 0% { transform: translateX(100%); }
                 100% { transform: translateX(-100%); }
             }
+            .curtain {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #8B4513;
+                transform-origin: top;
+                transition: transform 1s ease-in-out;
+                z-index: 9999;
+            }
+            .curtain-left {
+                clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+            }
+            .curtain-right {
+                clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+            }
+            .curtain-open {
+                transform: scaleY(0);
+            }
         }
     </style>
 </head>
 <body class="font-sans bg-gray-100 text-gray-800 relative">
+    <!-- Preloader with curtain effect -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <img src="images/logo.png" alt="Logo Un Café Con JJ" class="w-32 h-32 pulse">
+    </div>
+    <div id="curtain-left" class="curtain curtain-left"></div>
+    <div id="curtain-right" class="curtain curtain-right"></div>
+
     <!-- SVG Background -->
     <div class="fixed inset-0 z-0 pointer-events-none opacity-5">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -76,15 +103,10 @@
         </svg>
     </div>
 
-    <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <img src="images/logo.png" alt="Logo Un Café Con JJ" class="w-32 h-32 pulse">
-    </div>
-
     <!-- Top Banner -->
     <div class="bg-primary text-white py-2 px-4 overflow-hidden">
-        <div id="banner-messages" class="animate-marquee whitespace-nowrap">
-            Últimas noticias: Manténgase informado con Un Café Con JJ - El noticiero digital más escuchado de Guayaquil
+        <div id="banner-messages" class="flex transition-transform duration-1000 ease-in-out">
+            <!-- Messages will be inserted here dynamically -->
         </div>
     </div>
 
@@ -184,10 +206,12 @@
         </section>
 
         <section id="programa-banner" class="mb-12 relative">
-            <img src="images/programa-banner.jpg" alt="Un Café Con JJ - Programa" class="w-full h-auto rounded-xl shadow-lg">
-            <a href="https://www.youtube.com/channel/UCYUfYC2ZzWBmvfRp8ByQweQ" target="_blank" rel="noopener noreferrer" class="absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
-                Ver en YouTube
-            </a>
+            <img src="https://source.unsplash.com/random/1200x400/?news,broadcast" alt="Un Café Con JJ - Programa" class="w-full h-auto rounded-xl shadow-lg object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-50 rounded-xl flex items-center justify-center">
+                <a href="https://www.youtube.com/channel/UCYUfYC2ZzWBmvfRp8ByQweQ" target="_blank" rel="noopener noreferrer" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300 text-lg">
+                    Ver en YouTube
+                </a>
+            </div>
         </section>
 
         <section id="faqs" class="mb-12 bg-white rounded-xl shadow-lg p-8">
@@ -229,6 +253,38 @@
                     </button>
                 </div>
             </form>
+        </section>
+
+        <!-- New Reviews Section -->
+        <section id="reviews" class="mb-12 bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Lo que dicen nuestros oyentes</h2>
+            <div class="relative overflow-hidden">
+                <div id="reviews-container" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Reviews will be inserted here dynamically -->
+                </div>
+                <button id="prevReview" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 rounded-full p-2 transition-all duration-300">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextReview" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 rounded-full p-2 transition-all duration-300">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Google Map Section -->
+        <section id="map" class="mb-12">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Encuéntranos</h2>
+            <div class="rounded-xl overflow-hidden shadow-lg" style="width: 100%; height: 400px;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254508.51141489705!2d-80.05583754765878!3d-2.1523157738145883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x902d13cbe855805f%3A0x8015a492f4fca473!2sGuayaquil%2C%20Ecuador!5e0!3m2!1sen!2sus!4v1651234567890!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </section>
 
         <section id="boletin" class="mb-12 bg-gradient-primary text-white rounded-xl shadow-lg p-8">
