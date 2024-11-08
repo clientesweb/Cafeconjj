@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Preloader
+    const preloader = document.getElementById('preloader');
+    window.addEventListener('load', () => {
+        preloader.style.display = 'none';
+    });
+
+    // Top Banner
+    const bannerText = document.getElementById('banner-text');
+    bannerText.style.animationDuration = `${bannerText.offsetWidth / 100}s`;
+
     // Carrusel de imágenes
     const carousel = document.getElementById('carousel');
     const prevBtn = document.getElementById('prevBtn');
@@ -136,5 +146,32 @@ document.addEventListener('DOMContentLoaded', () => {
             deferredPrompt = null;
         }
         installButton.classList.add('hidden');
+    });
+
+    // Formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        const whatsappMessage = `Nombre: ${name}%0AEmail: ${email}%0AMensaje: ${message}`;
+        const phoneNumber = '+593999472777';
+        const url = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+        window.open(url, '_blank');
+        contactForm.reset();
+    });
+
+    // Boletín informativo
+    const newsletterForm = document.getElementById('newsletter-form');
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = newsletterForm.querySelector('input[type="text"]').value;
+        const whatsapp = newsletterForm.querySelector('input[type="tel"]').value;
+        const message = `Nuevo suscriptor al boletín:%0ANombre: ${name}%0AWhatsApp: ${whatsapp}`;
+        const phoneNumber = '+593999472777';
+        const url = `https://wa.me/${phoneNumber}?text=${message}`;
+        window.open(url, '_blank');
+        newsletterForm.reset();
     });
 });
