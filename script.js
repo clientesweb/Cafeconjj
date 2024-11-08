@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Top Banner
-    const bannerText = document.getElementById('banner-text');
+    const bannerText = document.querySelector('.animate-marquee');
     bannerText.style.animationDuration = `${bannerText.offsetWidth / 100}s`;
 
     // Carrusel de imágenes
@@ -145,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             deferredPrompt = null;
         }
-        installButton.classList.add('hidden');
     });
 
     // Formulario de contacto
