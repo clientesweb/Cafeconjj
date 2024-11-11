@@ -8,7 +8,7 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#8B4513">
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Un Cafe Con JJ">
@@ -81,9 +81,9 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8B4513',
-                        secondary: '#FFD700',
-                        accent: '#FFFFFF',
+                        primary: '#000000',
+                        secondary: '#D4AF37',
+                        accent: '#B8860B',
                     },
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
@@ -98,7 +98,7 @@
     <style type="text/tailwindcss">
         @layer utilities {
             .bg-gradient-primary {
-                background-image: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(139, 69, 19, 0.8), rgba(255, 255, 255, 0.8));
+                background-image: linear-gradient(135deg, #D4AF37, #B8860B, #000000);
             }
             .text-shadow {
                 text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -140,6 +140,22 @@
             }
             .fade-in.visible {
                 opacity: 1;
+            }
+            .horizontal-scroll {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .horizontal-scroll::-webkit-scrollbar {
+                display: none;
+            }
+            .scroll-item {
+                scroll-snap-align: start;
+                flex: 0 0 auto;
             }
         }
     </style>
@@ -233,16 +249,34 @@
             </div>
         </section>
 
+        <!-- Nueva sección para YouTube Shorts -->
+        <section id="youtube-shorts" class="mb-12 fade-in">
+            <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Nuestros Shorts</h2>
+            <div class="horizontal-scroll">
+                <!-- Ejemplo de shorts, reemplaza los IDs con los tuyos -->
+                <div class="scroll-item w-[315px] h-[560px]">
+                    <iframe width="315" height="560" src="https://www.youtube.com/embed/VIDEO_ID1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="scroll-item w-[315px] h-[560px]">
+                    <iframe width="315" height="560" src="https://www.youtube.com/embed/VIDEO_ID2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="scroll-item w-[315px] h-[560px]">
+                    <iframe width="315" height="560" src="https://www.youtube.com/embed/VIDEO_ID3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <!-- Agrega más shorts según sea necesario -->
+            </div>
+        </section>
+
         <section id="instagram-videos" class="mb-12 fade-in">
             <h2 class="text-4xl font-serif font-bold text-center mb-6 text-primary">Nuestros Reels</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="instagram-video-item aspect-[9/16] w-full">
+            <div class="horizontal-scroll">
+                <div class="scroll-item w-[315px] h-[560px]">
                     <iframe src="https://www.instagram.com/reel/DB_vzITJKC_/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
                 </div>
-                <div class="instagram-video-item aspect-[9/16] w-full">
+                <div class="scroll-item w-[315px] h-[560px]">
                     <iframe src="https://www.instagram.com/reel/DB_vnY-JgTP/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
                 </div>
-                <div class="instagram-video-item aspect-[9/16] w-full">
+                <div class="scroll-item w-[315px] h-[560px]">
                     <iframe src="https://www.instagram.com/reel/DB_ZdoYRFEK/embed" class="w-full h-full rounded-xl" allowfullscreen></iframe>
                 </div>
             </div>
